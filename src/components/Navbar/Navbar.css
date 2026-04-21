@@ -1,0 +1,95 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1.5rem 0;
+  transition: all 0.4s ease;
+}
+.navbar.scrolled {
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-right: auto;
+}
+.logo-bracket { color: var(--accent-1); }
+.nav-links {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.nav-link {
+  position: relative;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  transition: color var(--transition);
+}
+.nav-link:hover, .nav-link.active { color: var(--text-primary); }
+.nav-link-underline {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--accent-1);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+.nav-link:hover .nav-link-underline,
+.nav-link.active .nav-link-underline { width: 80%; }
+.nav-cta { padding: 0.6rem 1.4rem; font-size: 0.875rem; }
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translateY(7px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translateY(-7px); }
+.mobile-menu {
+  background: rgba(10, 10, 15, 0.97);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.mobile-link {
+  display: block;
+  padding: 1rem 1.5rem;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+}
+.mobile-link:hover { color: var(--accent-1); padding-left: 2rem; }
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+}
