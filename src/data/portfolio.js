@@ -30,7 +30,7 @@ export const projects = [
     description: "An advanced AI-powered cybersecurity platform that leverages machine learning and NLP to detect threats in real-time. Features URL scanning, text analysis, file inspection, and anomaly detection with a sleek dark cyberpunk UI.",
     tags: ["JavaScript", "AI/ML", "Cybersecurity", "NLP", "React"],
     github: "https://github.com/shyam030904/Ai-cyber-Defend",
-    live: "#",
+    live: "https://ai-cyber-defense-nine.vercel.app",
     color: "#00f5ff",
     featured: true,
   },
