@@ -5,15 +5,7 @@
 .footer-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-.footer-logo {
-  font-family: var(--font-mono);
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text-primary);
+  justify-content: center;
 }
 .footer-copy {
   font-size: 0.85rem;
@@ -21,7 +13,5 @@
   display: flex;
   align-items: center;
   gap: 0.35rem;
+  text-align: center;
 }
-.footer-socials { display: flex; gap: 1rem; }
-.footer-social { color: var(--text-muted); transition: var(--transition); display: flex; }
-@media (max-width: 600px) { .footer-inner { flex-direction: column; text-align: center; } }

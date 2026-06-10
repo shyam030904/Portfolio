@@ -53,4 +53,5 @@
   display: inline-block;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+.btn-error { background: linear-gradient(135deg, #ef4444, #b91c1c); color: #fff; border-color: #ef4444; }
 @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }

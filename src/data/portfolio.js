@@ -10,7 +10,8 @@ export const personalInfo = {
   availability: "Open to opportunities",
   github: "https://github.com/shyam030904",
   linkedin: "https://linkedin.com/in/shyamyadav",
-  twitter: "https://twitter.com/shyamyadav",
+  instagram: "https://instagram.com/shyam030904",
+  leetcode: "https://leetcode.com/u/shyam030904/",
   resume: "#",
 };
 
