@@ -6,8 +6,6 @@ import emailjs from '@emailjs/browser';
 import { personalInfo } from '../../data/portfolio';
 import './Contact.css';
 
-// Initialize EmailJS once with the public key
-emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
 
 // Custom Instagram SVG icon
 const InstagramIcon = ({ size = 20 }) => (
@@ -52,7 +50,8 @@ export default function Contact() {
           from_name:  form.name,
           from_email: form.email,
           message:    form.message,
-        }
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
 
       // 2️⃣  Auto-reply to visitor (best-effort — won't fail the submission if it errors)
@@ -65,7 +64,8 @@ export default function Contact() {
           reply_to:   form.email,
           from_name:  'Shyam Yadav',
           message:    form.message,
-        }
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       ).catch(err => console.warn('Auto-reply skipped:', err));
 
       setStatus('sent');
