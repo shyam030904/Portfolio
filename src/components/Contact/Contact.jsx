@@ -41,7 +41,8 @@ export default function Contact() {
     setStatus('sending');
 
     try {
-      await emailjs.send(
+      // 1️⃣  Notify Shyam — the existing "incoming message" template
+      const notifyMe = emailjs.send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         {
@@ -51,6 +52,23 @@ export default function Contact() {
         },
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
+
+      // 2️⃣  Auto-reply to the visitor — let them know their message was received
+      const autoReply = emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID,
+        {
+          to_name:    form.name,
+          to_email:   form.email,   // EmailJS sends TO this address
+          from_name:  'Shyam Yadav',
+          message:    form.message, // echo back so they remember what they wrote
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+
+      // Send both at the same time
+      await Promise.all([notifyMe, autoReply]);
+
       setStatus('sent');
       setForm({ name: '', email: '', message: '' });
       setTimeout(() => setStatus('idle'), 5000);
