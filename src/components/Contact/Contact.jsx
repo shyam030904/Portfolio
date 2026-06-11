@@ -6,6 +6,9 @@ import emailjs from '@emailjs/browser';
 import { personalInfo } from '../../data/portfolio';
 import './Contact.css';
 
+// Initialize EmailJS once with the public key
+emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+
 // Custom Instagram SVG icon
 const InstagramIcon = ({ size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -41,33 +44,29 @@ export default function Contact() {
     setStatus('sending');
 
     try {
-      // 1️⃣  Notify Shyam — the existing "incoming message" template
-      const notifyMe = emailjs.send(
+      // 1️⃣  Notify Shyam — send the incoming message notification
+      await emailjs.send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         {
           from_name:  form.name,
           from_email: form.email,
           message:    form.message,
-        },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        }
       );
 
-      // 2️⃣  Auto-reply to the visitor — let them know their message was received
-      const autoReply = emailjs.send(
+      // 2️⃣  Auto-reply to visitor (best-effort — won't fail the submission if it errors)
+      emailjs.send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID,
         {
           to_name:    form.name,
-          to_email:   form.email,   // EmailJS sends TO this address
+          to_email:   form.email,
+          reply_to:   form.email,
           from_name:  'Shyam Yadav',
-          message:    form.message, // echo back so they remember what they wrote
-        },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      );
-
-      // Send both at the same time
-      await Promise.all([notifyMe, autoReply]);
+          message:    form.message,
+        }
+      ).catch(err => console.warn('Auto-reply skipped:', err));
 
       setStatus('sent');
       setForm({ name: '', email: '', message: '' });
