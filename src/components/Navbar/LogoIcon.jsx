@@ -1,64 +1,103 @@
-export default function LogoIcon({ size = 38 }) {
+/**
+ * FlameLogoIcon — SVG flame logo inspired by the reference.
+ * White flowing flame on a dark navy rounded-square background.
+ * Pure SVG, no images.
+ */
+export default function LogoIcon({ size = 42 }) {
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 80 80"
+      viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ display: 'block' }}
+      style={{ display: 'block', borderRadius: '22%' }}
     >
-      {/* Background circle */}
-      <circle cx="40" cy="40" r="40" fill="url(#logoGrad)" />
-
-      {/* Neck */}
-      <rect x="33" y="55" width="14" height="10" rx="4" fill="#FDBCB4" />
-
-      {/* Shoulders / shirt */}
-      <ellipse cx="40" cy="72" rx="22" ry="12" fill="#6c63ff" />
-
-      {/* Head */}
-      <ellipse cx="40" cy="36" rx="18" ry="20" fill="#FDBCB4" />
-
-      {/* Hair */}
-      <ellipse cx="40" cy="19" rx="18" ry="8" fill="#2d2d2d" />
-      <rect x="22" y="17" width="36" height="10" rx="2" fill="#2d2d2d" />
-      {/* Side hair */}
-      <rect x="22" y="22" width="5" height="10" rx="3" fill="#2d2d2d" />
-      <rect x="53" y="22" width="5" height="10" rx="3" fill="#2d2d2d" />
-
-      {/* Left glasses frame */}
-      <rect x="24" y="33" width="13" height="9" rx="4" stroke="#2d2d2d" strokeWidth="2" fill="rgba(108,99,255,0.18)" />
-      {/* Right glasses frame */}
-      <rect x="43" y="33" width="13" height="9" rx="4" stroke="#2d2d2d" strokeWidth="2" fill="rgba(108,99,255,0.18)" />
-      {/* Bridge */}
-      <line x1="37" y1="37.5" x2="43" y2="37.5" stroke="#2d2d2d" strokeWidth="2" />
-      {/* Left arm */}
-      <line x1="24" y1="37.5" x2="21" y2="37.5" stroke="#2d2d2d" strokeWidth="2" />
-      {/* Right arm */}
-      <line x1="56" y1="37.5" x2="59" y2="37.5" stroke="#2d2d2d" strokeWidth="2" />
-
-      {/* Eyes (pupils) */}
-      <circle cx="30.5" cy="37.5" r="2.5" fill="#2d2d2d" />
-      <circle cx="49.5" cy="37.5" r="2.5" fill="#2d2d2d" />
-      {/* Eye shine */}
-      <circle cx="31.5" cy="36.5" r="0.8" fill="white" />
-      <circle cx="50.5" cy="36.5" r="0.8" fill="white" />
-
-      {/* Smile */}
-      <path d="M 34 47 Q 40 52 46 47" stroke="#c0737a" strokeWidth="2" fill="none" strokeLinecap="round" />
-
-      {/* Ear left */}
-      <ellipse cx="22.5" cy="37" rx="2.5" ry="3.5" fill="#FDBCB4" />
-      {/* Ear right */}
-      <ellipse cx="57.5" cy="37" rx="2.5" ry="3.5" fill="#FDBCB4" />
-
       <defs>
-        <linearGradient id="logoGrad" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#0f0f1a" />
-          <stop offset="100%" stopColor="#1a1040" />
+        {/* Navy background gradient */}
+        <linearGradient id="bgGrad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#1b2a4a" />
+          <stop offset="100%" stopColor="#162040" />
         </linearGradient>
+
+        {/* Flame white-to-blue-tint gradient */}
+        <linearGradient id="flameGrad" x1="50" y1="20" x2="50" y2="85" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stopColor="#ffffff" stopOpacity="1" />
+          <stop offset="100%" stopColor="#d4e4ff" stopOpacity="0.9" />
+        </linearGradient>
+
+        {/* Glow filter */}
+        <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="2.5" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
       </defs>
+
+      {/* Background */}
+      <rect width="100" height="100" rx="22" fill="url(#bgGrad)" />
+
+      {/* ── Flame ── */}
+      {/*
+        Three layered flame paths:
+        1. Left swirl (smaller, secondary flame)
+        2. Right swirl (smaller, secondary flame)
+        3. Main tall flame (center)
+      */}
+
+      {/* Left swirl */}
+      <path
+        d="
+          M 42 80
+          C 42 80 28 70 30 55
+          C 31 47 38 43 36 35
+          C 34 28 30 25 30 25
+          C 36 30 42 35 40 45
+          C 38 52 32 56 36 65
+          C 38 71 44 74 42 80
+          Z
+        "
+        fill="url(#flameGrad)"
+        opacity="0.75"
+        filter="url(#glow)"
+      />
+
+      {/* Right swirl */}
+      <path
+        d="
+          M 58 80
+          C 58 80 72 70 70 55
+          C 69 47 62 43 64 35
+          C 66 28 70 25 70 25
+          C 64 30 58 35 60 45
+          C 62 52 68 56 64 65
+          C 62 71 56 74 58 80
+          Z
+        "
+        fill="url(#flameGrad)"
+        opacity="0.75"
+        filter="url(#glow)"
+      />
+
+      {/* Main center flame */}
+      <path
+        d="
+          M 50 18
+          C 50 18 62 30 60 44
+          C 59 51 52 55 54 63
+          C 55 68 60 72 58 78
+          C 55 84 50 86 50 86
+          C 50 86 45 84 42 78
+          C 40 72 45 68 46 63
+          C 48 55 41 51 40 44
+          C 38 30 50 18 50 18
+          Z
+        "
+        fill="url(#flameGrad)"
+        filter="url(#glow)"
+      />
     </svg>
   );
 }

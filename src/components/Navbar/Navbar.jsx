@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import './Navbar.css';
 import { personalInfo } from '../../data/portfolio';
-import myPhoto from '../../assets/shyam-photo.png';
+import LogoIcon from './LogoIcon';
 
 const navLinks = [
   { label: 'About', href: '#about' },
@@ -39,15 +39,15 @@ export default function Navbar({ onResumeOpen }) {
         <motion.a
           href="#"
           className="nav-logo"
-          whileHover={{ scale: 1.08 }}
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', textDecoration: 'none' }}
         >
-          <img
-            src={myPhoto}
-            alt="Shyam Yadav"
-            className="nav-avatar"
-          />
+          <LogoIcon size={40} />
+          <span className="nav-brand-text">
+            <span className="nav-brand-first">Shyam</span>
+            <span className="nav-brand-last"> Yadav</span>
+          </span>
         </motion.a>
 
         <nav className="nav-links">
